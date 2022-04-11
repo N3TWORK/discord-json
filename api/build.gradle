@@ -40,9 +40,9 @@ publishing {
                     }
                 }
                 scm {
-                    url = 'https://github.com/Discord4J/discord-json'
-                    connection = 'scm:git:git://github.com/Discord4J/discord-json.git'
-                    developerConnection = 'scm:git:ssh://git@github.com:Discord4J/discord-json.git'
+                    url = 'https://github.com/N3TWORK/discord-json'
+                    connection = 'scm:git:git://github.com/N3TWORK/discord-json.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:N3TWORK/discord-json.git'
                 }
                 developers {
                     developer {
@@ -57,9 +57,9 @@ publishing {
         repositories {
             maven {
                 if (isRelease) {
-                    url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+                    url 'https://nexus.n3twork.com/repository/maven-releases/'
                 } else {
-                    url 'https://oss.sonatype.org/content/repositories/snapshots'
+                    url 'https://nexus.n3twork.com/repository/maven-snapshots/'
                 }
                 def sonatypeUsername = findProperty('sonatypeUsername')
                 def sonatypePassword = findProperty('sonatypePassword')
@@ -71,17 +71,6 @@ publishing {
                 }
             }
         }
-    }
-}
-
-if (!isJitpack && isRelease) {
-    signing {
-        def signingKey = findProperty("signingKey")
-        def signingPassword = findProperty("signingPassword")
-        if (signingKey != null && signingPassword != null) {
-            useInMemoryPgpKeys(new String(signingKey.decodeBase64()), signingPassword as String)
-        }
-        sign publishing.publications.mavenJava
     }
 }
 
